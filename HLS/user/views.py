@@ -1,9 +1,34 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 from .models import User 
 # Create your views here.
 
-def register(request):
+
+
+def login(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
+
+    elif request.method == 'POST':
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+
+        res_data = {}
+        if not (username and password):
+            res_data['error'] = '값을 모두 입력하세요'
+        else:
+            user = User.objects.get(username=username)
+            if check_password(password, user.password):
+                request.session['user'] = user.id 
+                return redirect('/')
+            else:
+                res_data['error'] = '비밀번호가 다릅니다.'
+
+        return render(request, 'login.html', res_data)
+            
+
+
+def register(request): #회원가입
     if request.method == 'GET':
         return render(request, 'register.html')
     
