@@ -5,6 +5,15 @@ from .models import User
 from .forms import LoginForm
 # Create your views here.
 
+def home(request):
+    return render(request, 'home.html')
+
+    
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+
+    return redirect('/')
 
 
 def login(request):
