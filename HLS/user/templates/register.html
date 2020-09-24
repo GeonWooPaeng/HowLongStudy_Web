@@ -14,7 +14,17 @@
     <div class="col-12">
         <form method="POST" action=".">
             {% csrf_token %}
+            {% for rfield in rform %}
             <div class="form-group">
+                <label for="{{ rfield.id_for_label }}">{{ rfield.label }}</label>
+                <input type="{{ rfield.field.widget.input_type }}" class="form-control" id="{{ rfield.id_for_label }}"
+                    placeholder="{{ rfield.label }}" name="{{ rfield.name }}" />
+            </div>
+            {% if rfield.errors %}
+            <span style="color:red">{{ rfield.errors }}</span>
+            {% endif %}
+            {% endfor %}
+            <!-- <div class="form-group">
                 <label for="username">사용자 이름</label>
                 <input
                     type="text"
@@ -43,7 +53,7 @@
                     placeholder="비밀번호 확인"
                     name="re-password"
                     />
-            </div>
+            </div> -->
             <button type="submit" class="btn btn-primary">등록</button>
         </form>
     </div>
