@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block contents %}
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <h1>Timer</h1>
+        </div>
+    </div>
+    <div>
+        <div>
+            <span id="postTestMin">00</span> <!--분-->
+            <span>:</span>
+            <span id="postTestSec">00</span> <!--초-->
+            <span>:</span>
+            <span id="postTestMilisec">00</span><!--밀리초-->
+        </div>
+        <div>
+            <ul id="testRecordList"></ul><!--중간 기록할 리스트-->
+        </div>
+        <div>
+            <button type="button" id="testStartBtn">START</button><!--시작/재시작/기록 버튼-->
+            <button type="button" id="testStopBtn">STOP</button><!--스톱 버튼-->
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        var stTime = 0 //var: 변수
+        var endTime = 0 
+        var timerStart 
+
+        var min
+        var sec 
+        var milisec 
+
+        var startBtn = document.getElementById('testStartBtn')
+        var stopBtn = document.getElementById('testStopBtn')
+        var recordList = document.getElementById('testRecordList')
+        //document.getElementById(): html에서 해당 아이디를 가진 태그를 선택합니다.
+
+        startBtn.addEventListener('click',function(){
+            //addEventListener('click'): 위의 것이 click이 되면서 function()과 그 안의 것을 수행한다.
+            
+            if(this.innerText == 'RECORD' && milisec){
+                //Record 
+                console.log(min, sec, milisec)
+                var li = document.createElement('li')
+                li.innerText = min + ' : ' + sec + ' : ' + milisec 
+
+                if(! recordList.firstChild){
+                    recordList.append(li)
+                }
+                else{
+                    recordList.insertBefore(li, recordList.firstChild)
+                }
+                return false
+            }
+            this.innerText = 'RECORD'
+
+
+            if(! stTime){
+                stTime = Date.now() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
+                // Date() 생성자는 시간의 특정 지점을 나타내는 Date 객체 생성
+            }
+            else{
+                stopBtn.innerText = 'STOP'
+                stTime += (Date.now() - endTime)
+            }
+            
+            timerStart = setInterval(function(){
+                //setInterval: 일정 시간 간격으로 작업을 수행하기 위해 사용
+                
+                var nowTime = new Date(Date.now() - stTime ) //1ms당 한번씩 현재 timestamp를 불러와 nowTime에 저장
+
+                min = nowTime.getMinutes() //분 
+                sec = nowTime.getSeconds() //초 
+                milisec = Math.floor(nowTime.getMilliseconds()/10) //밀리초 
+                // Math.floor(): 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환 
+                // .getMilliseconds(): 주어진 날짜의 현지 시간 기준 밀리초를 나타내는 0~999 사이의 정수
+
+                document.getElementById('postTestMin').innerText = addZero(min)
+                document.getElementById('postTestSec').innerText = addZero(sec)
+                document.getElementById('postTestMilisec').innerText = addZero(milisec)
+                // innerText: 문자열 
+            }, 1)
+        })
+
+        stopBtn.addEventListener('click', function() {
+            if(timerStart){
+                clearInterval(timerStart)
+                //clearInterval: setInterval로 반복하고 있는것을 멈추게 한다.
+                
+                if(this.innerText == 'STOP'){
+                    endTime = Date.now() //STOP시점의 시간 저장
+                    this.innerText = 'RESET'
+                    startBtn.innerText = 'RESTART'
+                }else {	// RESET
+                    stTime = 0
+                    min = 0
+                    sec = 0
+                    milisec = 0
+                    document.getElementById('postTestMin').innerText = '00'
+                    document.getElementById('postTestSec').innerText = '00'
+                    document.getElementById('postTestMilisec').innerText = '00'
+                    startBtn.innerText = 'START'
+                    this.innerText = 'STOP'
+                    timerStart = null
+                    recordList.innerHTML = ''
+                }
+            }
+        })
+
+        function addZero(num){
+            // 10보다 작으면 앞에 0을 붙임
+            return (num < 10 ? '0'+num: ''+num)
+        }
+    </script>
+
+{% endblock %}
