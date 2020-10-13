@@ -7,6 +7,8 @@
     </div>
     <div>
         <div>
+            <span id="postTestHour">00</span>
+            <span>:</span>
             <span id="postTestMin">00</span> <!--분-->
             <span>:</span>
             <span id="postTestSec">00</span> <!--초-->
@@ -27,7 +29,8 @@
         var stTime = 0 //var: 변수
         var endTime = 0 
         var timerStart 
-
+        
+        var hour 
         var min
         var sec 
         var milisec 
@@ -42,9 +45,9 @@
             
             if(this.innerText == 'RECORD' && milisec){
                 //Record 
-                console.log(min, sec, milisec) // console.log: 객체를 print하는 것(변경사항이 실시간으로 update된다.)
+                console.log(hour, min, sec, milisec) // console.log: 객체를 print하는 것(변경사항이 실시간으로 update된다.)
                 var li = document.createElement('li') //createElement('html 요소'): 'html 요소'를 추가할 수 있다.
-                li.innerText = min + ' : ' + sec + ' : ' + milisec 
+                li.innerText =hour + ' : ' + min + ' : ' + sec + ' : ' + milisec 
 
                 if(! recordList.firstChild){
                     //.firstChild : 트리에서 노드의 첫번째 자식 & null(자식x)을 반환
@@ -72,12 +75,14 @@
                 
                 var nowTime = new Date(Date.now() - stTime ) //1ms당 한번씩 현재 timestamp를 불러와 nowTime에 저장
 
+                hour = nowTime.getHours() //시
                 min = nowTime.getMinutes() //분 
                 sec = nowTime.getSeconds() //초 
                 milisec = Math.floor(nowTime.getMilliseconds()/10) //밀리초 
                 // Math.floor(): 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환 
                 // .getMilliseconds(): 주어진 날짜의 현지 시간 기준 밀리초를 나타내는 0~999 사이의 정수
 
+                document.getElementById('postTestHour').innerText = addZero(hour)
                 document.getElementById('postTestMin').innerText = addZero(min)
                 document.getElementById('postTestSec').innerText = addZero(sec)
                 document.getElementById('postTestMilisec').innerText = addZero(milisec)
@@ -96,9 +101,11 @@
                     startBtn.innerText = 'RESTART'
                 }else {	// RESET
                     stTime = 0
+                    hour = 0 
                     min = 0
                     sec = 0
                     milisec = 0
+                    document.getElementById('postTestHour').innerText = '00'
                     document.getElementById('postTestMin').innerText = '00'
                     document.getElementById('postTestSec').innerText = '00'
                     document.getElementById('postTestMilisec').innerText = '00'
