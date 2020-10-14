@@ -7,7 +7,7 @@ def timer(request):
     return render(request, 'timer.html')
 
 
-# class TimerRank(ListView):
+# class timerRank(ListView):
 #     model = Timer
 #     template_name = 'timer_rank.html'
 #     context_object_name = 'timer_list'

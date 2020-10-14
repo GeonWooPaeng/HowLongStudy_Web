@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from user.views import home, RegisterView, LoginView, logout
-from timer.views import timer 
+from timer.views import timer #, timerRank
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,5 @@ urlpatterns = [
     path('login/', LoginView.as_view()),
     path('logout/', logout),
     path('timer/', timer),
+    # path('timer_rank/',timer_rank)
 ]

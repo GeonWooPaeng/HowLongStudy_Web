@@ -5,8 +5,15 @@
             <h1>Timer</h1>
         </div>
     </div>
+
+    <hr/> 
+    
+    <button class="btn btn-primary btn-block" onclick="location.href='/timer_rank/'">랭크</button>
+    
+    <hr/>
+
     <div>
-        <div>
+        <div style="border-left:4px solid red; font-size:55pt;">
             <span id="postHour">00</span>
             <span>:</span>
             <span id="postMin">00</span> <!--분-->
@@ -25,8 +32,9 @@
         </div>
     </div>
 
+    <!-- vanilla js 부분(timer) -->
     <script type="text/javascript">
-
+    
         var stTime = 0 //var: 변수
         var endTime = 0 
         var timerStart 
@@ -35,12 +43,12 @@
         var min
         var sec 
         var milisec 
-
+    
         var startBtn = document.getElementById('StartBtn')
         var stopBtn = document.getElementById('StopBtn')
         var recordList = document.getElementById('RecordList')
         //document.getElementById(): html에서 해당 아이디를 가진 태그를 선택합니다.
-
+    
         startBtn.addEventListener('click',function(){
             //addEventListener('click'): 위의 것이 click이 되면서 function()과 그 안의 것을 수행한다.
             
@@ -49,7 +57,7 @@
                 console.log(hour, min, sec, milisec) // console.log: 객체를 print하는 것(변경사항이 실시간으로 update된다.)
                 var li = document.createElement('li') //createElement('html 요소'): 'html 요소'를 추가할 수 있다.
                 li.innerText =hour + ' : ' + min + ' : ' + sec + ' : ' + milisec 
-
+    
                 if(! recordList.firstChild){
                     //.firstChild : 트리에서 노드의 첫번째 자식 & null(자식x)을 반환
                     recordList.append(li)
@@ -61,7 +69,7 @@
                 return false
             }
             this.innerText = 'RECORD'
-
+    
             if(! stTime){
                 stTime = Date.now() //클릭한 시점의 현재시간 timestamp를 stTime에 저장
                 // Date() 생성자는 시간의 특정 지점을 나타내는 Date 객체 생성
@@ -75,14 +83,14 @@
                 //setInterval: 일정 시간 간격으로 작업을 수행하기 위해 사용
                 
                 var nowTime = new Date(Date.now() - stTime) //1ms당 한번씩 현재 timestamp를 불러와 nowTime에 저장
-
+    
                 hour = addZero(Math.floor(nowTime.getHours()) - 9) //시
                 min = addZero(nowTime.getMinutes()) //분 
                 sec = addZero(nowTime.getSeconds()) //초 
                 milisec = addZero(Math.floor(nowTime.getMilliseconds()/10)) //밀리초 
                 // Math.floor(): 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환 
                 // .getMilliseconds(): 주어진 날짜의 현지 시간 기준 밀리초를 나타내는 0~999 사이의 정수
-
+    
                 document.getElementById('postHour').innerText = hour
                 document.getElementById('postMin').innerText = min
                 document.getElementById('postSec').innerText = sec
@@ -90,7 +98,7 @@
                 // innerText: 문자열 
             }, 1)
         })
-
+    
         stopBtn.addEventListener('click', function() {
             if(timerStart){
                 clearInterval(timerStart)
@@ -117,11 +125,13 @@
                 }
             }
         })
-
+    
         function addZero(num){
             // 10보다 작으면 앞에 0을 붙임
             return (num < 10 ? "0"+num: ""+num)
         }
     </script>
+    
+
 
 {% endblock %}
