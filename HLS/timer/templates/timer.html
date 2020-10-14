@@ -7,20 +7,21 @@
     </div>
     <div>
         <div>
-            <span id="postTestHour">00</span>
+            <span id="postHour">00</span>
             <span>:</span>
-            <span id="postTestMin">00</span> <!--분-->
+            <span id="postMin">00</span> <!--분-->
             <span>:</span>
-            <span id="postTestSec">00</span> <!--초-->
+            <span id="postSec">00</span> <!--초-->
             <span>:</span>
-            <span id="postTestMilisec">00</span><!--밀리초-->
+            <span id="postMilisec">00</span><!--밀리초-->
         </div>
         <div>
-            <ul id="testRecordList"></ul><!--중간 기록할 리스트-->
+            <ul id="RecordList"></ul><!--중간 기록할 리스트-->
         </div>
         <div>
-            <button type="button" id="testStartBtn">START</button><!--시작/재시작/기록 버튼-->
-            <button type="button" id="testStopBtn">STOP</button><!--스톱 버튼-->
+            <button type="button" id="StartBtn">START</button><!--시작/재시작/기록 버튼-->
+            <button type="button" id="StopBtn">STOP</button><!--스톱 버튼-->
+            <button type="submit" class="btn btn-primary" id="SaveBtn">SAVE</button>
         </div>
     </div>
 
@@ -35,9 +36,9 @@
         var sec 
         var milisec 
 
-        var startBtn = document.getElementById('testStartBtn')
-        var stopBtn = document.getElementById('testStopBtn')
-        var recordList = document.getElementById('testRecordList')
+        var startBtn = document.getElementById('StartBtn')
+        var stopBtn = document.getElementById('StopBtn')
+        var recordList = document.getElementById('RecordList')
         //document.getElementById(): html에서 해당 아이디를 가진 태그를 선택합니다.
 
         startBtn.addEventListener('click',function(){
@@ -73,19 +74,19 @@
             timerStart = setInterval(function(){
                 //setInterval: 일정 시간 간격으로 작업을 수행하기 위해 사용
                 
-                var nowTime = new Date(Date.now() - stTime ) //1ms당 한번씩 현재 timestamp를 불러와 nowTime에 저장
+                var nowTime = new Date(Date.now() - stTime) //1ms당 한번씩 현재 timestamp를 불러와 nowTime에 저장
 
-                hour = nowTime.getHours() //시
-                min = nowTime.getMinutes() //분 
-                sec = nowTime.getSeconds() //초 
-                milisec = Math.floor(nowTime.getMilliseconds()/10) //밀리초 
+                hour = addZero(Math.floor(nowTime.getHours()) - 9) //시
+                min = addZero(nowTime.getMinutes()) //분 
+                sec = addZero(nowTime.getSeconds()) //초 
+                milisec = addZero(Math.floor(nowTime.getMilliseconds()/10)) //밀리초 
                 // Math.floor(): 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환 
                 // .getMilliseconds(): 주어진 날짜의 현지 시간 기준 밀리초를 나타내는 0~999 사이의 정수
 
-                document.getElementById('postTestHour').innerText = addZero(hour)
-                document.getElementById('postTestMin').innerText = addZero(min)
-                document.getElementById('postTestSec').innerText = addZero(sec)
-                document.getElementById('postTestMilisec').innerText = addZero(milisec)
+                document.getElementById('postHour').innerText = hour
+                document.getElementById('postMin').innerText = min
+                document.getElementById('postSec').innerText = sec
+                document.getElementById('postMilisec').innerText = milisec
                 // innerText: 문자열 
             }, 1)
         })
@@ -105,10 +106,10 @@
                     min = 0
                     sec = 0
                     milisec = 0
-                    document.getElementById('postTestHour').innerText = '00'
-                    document.getElementById('postTestMin').innerText = '00'
-                    document.getElementById('postTestSec').innerText = '00'
-                    document.getElementById('postTestMilisec').innerText = '00'
+                    document.getElementById('postHour').innerText = '00'
+                    document.getElementById('postMin').innerText = '00'
+                    document.getElementById('postSec').innerText = '00'
+                    document.getElementById('postMilisec').innerText = '00'
                     startBtn.innerText = 'START'
                     this.innerText = 'STOP'
                     timerStart = null
@@ -119,7 +120,7 @@
 
         function addZero(num){
             // 10보다 작으면 앞에 0을 붙임
-            return (num < 10 ? '0'+num: ''+num)
+            return (num < 10 ? "0"+num: ""+num)
         }
     </script>
 
