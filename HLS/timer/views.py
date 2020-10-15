@@ -3,6 +3,7 @@ from django.shortcuts import render
 # from .models import Timer
 # Create your views here.
 
+
 def timer(request):
     return render(request, 'timer.html')
 
