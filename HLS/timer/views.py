@@ -1,12 +1,14 @@
 from django.shortcuts import render
+from .forms import SaveForm 
 # from django.views.generic import ListView
 # from .models import Timer
 # Create your views here.
 
 
-def timer(request):
-    return render(request, 'timer.html')
-
+class SaveTime(Formview):
+    template_name = 'timer.html'
+    form_class = SaveForm
+    success_url = '/'
 
 # class timerRank(ListView):
 #     model = Timer

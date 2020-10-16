@@ -19,8 +19,8 @@
             <span id="postMin">00</span> <!--분-->
             <span>:</span>
             <span id="postSec">00</span> <!--초-->
-            <span>:</span>
-            <span id="postMilisec">00</span><!--밀리초-->
+            <!-- <span>:</span>
+            <span id="postMilisec">00</span>--> <!--밀리초 -->
         </div>
         <div>
             <ul id="RecordList"></ul><!--중간 기록할 리스트-->
@@ -42,7 +42,7 @@
         var hour 
         var min
         var sec 
-        var milisec 
+        // var milisec 
     
         var startBtn = document.getElementById('StartBtn')
         var stopBtn = document.getElementById('StopBtn')
@@ -52,11 +52,11 @@
         startBtn.addEventListener('click',function(){
             //addEventListener('click'): 위의 것이 click이 되면서 function()과 그 안의 것을 수행한다.
             
-            if(this.innerText == 'RECORD' && milisec){
+            if(this.innerText == 'RECORD' && sec){
                 //Record 
-                console.log(hour, min, sec, milisec) // console.log: 객체를 print하는 것(변경사항이 실시간으로 update된다.)
+                console.log(hour, min, sec) //, milisec// console.log: 객체를 print하는 것(변경사항이 실시간으로 update된다.)
                 var li = document.createElement('li') //createElement('html 요소'): 'html 요소'를 추가할 수 있다.
-                li.innerText =hour + ' : ' + min + ' : ' + sec + ' : ' + milisec 
+                li.innerText =hour + ' : ' + min + ' : ' + sec //+ ' : ' + milisec 
     
                 if(! recordList.firstChild){
                     //.firstChild : 트리에서 노드의 첫번째 자식 & null(자식x)을 반환
@@ -87,14 +87,14 @@
                 hour = addZero(Math.floor(nowTime.getHours()) - 9) //시
                 min = addZero(nowTime.getMinutes()) //분 
                 sec = addZero(nowTime.getSeconds()) //초 
-                milisec = addZero(Math.floor(nowTime.getMilliseconds()/10)) //밀리초 
+                // milisec = addZero(Math.floor(nowTime.getMilliseconds()/10)) //밀리초 
                 // Math.floor(): 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환 
                 // .getMilliseconds(): 주어진 날짜의 현지 시간 기준 밀리초를 나타내는 0~999 사이의 정수
     
                 document.getElementById('postHour').innerText = hour
                 document.getElementById('postMin').innerText = min
                 document.getElementById('postSec').innerText = sec
-                document.getElementById('postMilisec').innerText = milisec
+                // document.getElementById('postMilisec').innerText = milisec
                 // innerText: 문자열 
             }, 1)
         })
@@ -113,11 +113,11 @@
                     hour = 0 
                     min = 0
                     sec = 0
-                    milisec = 0
+                    // milisec = 0
                     document.getElementById('postHour').innerText = '00'
                     document.getElementById('postMin').innerText = '00'
                     document.getElementById('postSec').innerText = '00'
-                    document.getElementById('postMilisec').innerText = '00'
+                    // document.getElementById('postMilisec').innerText = '00'
                     startBtn.innerText = 'START'
                     this.innerText = 'STOP'
                     timerStart = null

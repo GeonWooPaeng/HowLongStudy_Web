@@ -3,6 +3,6 @@ from .models import Timer
 # Register your models here.
 
 class TimerAdmin(admin.ModelAdmin):
-    list_display = ('user', 'study_time')
+    list_display = ('user', 'register_date')
 
 admin.site.register(Timer, TimerAdmin)
