@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, SaveForm
 from django.contrib.auth.hashers import make_password
 from .models import User
+
+
+from django.utils.decorators import method_decorator
+from .decorators import login_required
 # Create your views here.
 
 
@@ -39,3 +43,19 @@ def logout(request):
         del(request.session['user'])
     
     return redirect('/')
+
+
+class SaveTime(FormView):
+    template_name = 'timer.html'
+    form_class = SaveForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        user = User(
+            user=form.data.get('user'),
+            study_hour=form.data.get('study_hour'),
+            study_min=form.data.get('study_min'),
+            study_sec=form.data.get('study_sec')
+        )
+        user.save() 
+        return super().form_valid(form)

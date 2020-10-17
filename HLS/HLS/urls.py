@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from user.views import home, RegisterView, LoginView, logout
-from timer.views import SaveTime #, timerRank
+from user.views import SaveTime #, timerRank
 
 urlpatterns = [
     path('admin/', admin.site.urls),

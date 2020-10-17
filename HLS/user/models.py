@@ -11,6 +11,10 @@ class User(models.Model):
             ('user', 'user')
         )
     )
+    study_day = models.IntegerField(verbose_name='공부한 날')
+    study_hour = models.IntegerField(verbose_name='시간')
+    study_min = models.IntegerField(verbose_name='분')
+    study_sec = models.IntegerField(verbose_name='초')
     register_data = models.DateField(auto_now_add=True, verbose_name='등록 날짜')
 
     def __str__(self):
