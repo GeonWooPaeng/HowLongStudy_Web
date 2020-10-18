@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
+from django.utils.decorators import method_decorator 
 from .forms import RegisterForm, LoginForm, SaveForm
 from django.contrib.auth.hashers import make_password
+from django.db import transaction 
+from user.decorators import login_required
 from .models import User
 
 
@@ -45,17 +48,27 @@ def logout(request):
     return redirect('/')
 
 
+
 class SaveTime(FormView):
     template_name = 'timer.html'
     form_class = SaveForm
     success_url = '/'
 
     def form_valid(self, form):
-        user = User(
-            user=form.data.get('user'),
-            study_hour=form.data.get('study_hour'),
-            study_min=form.data.get('study_min'),
-            study_sec=form.data.get('study_sec')
-        )
-        user.save() 
+        with transaction.atomic():
+            user = User(
+                user=User.objects.get(email=self.request.session.get('email')),
+                # study_hour=form.data.get('study_hour'),
+                # study_min=form.data.get('study_min'),
+                study_sec=int(form.data.all('study_sec'))
+            )
+            user.save() 
         return super().form_valid(form)
+
+    def get_form_kwargs(self, **kwargs):
+        kw = super().get_form_kwargs(**kwargs)
+        
+        kw.update({
+            'request':self.request 
+        })
+        return kw 
