@@ -5,6 +5,7 @@ from .forms import RegisterForm, LoginForm, SaveForm
 from django.contrib.auth.hashers import make_password
 from django.db import transaction 
 from user.decorators import login_required
+from django.http import JsonResponse
 from .models import User
 
 
@@ -60,7 +61,7 @@ class SaveTime(FormView):
                 user=User.objects.get(email=self.request.session.get('email')),
                 # study_hour=form.data.get('study_hour'),
                 # study_min=form.data.get('study_min'),
-                study_sec=int(form.data.all('study_sec'))
+                study_sec=int(self.request.get('study_sec'))
             )
             user.save() 
         return super().form_valid(form)

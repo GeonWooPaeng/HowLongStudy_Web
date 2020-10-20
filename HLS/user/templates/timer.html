@@ -20,7 +20,7 @@
                 <span>:</span>
                 <span id="study_min">00</span> <!--분-->
                 <span>:</span>
-                <span class="value" id="study_sec" name="study_sec">00</span> <!--초-->
+                <span id="study_sec" name="study_sec">00</span> <!--초-->
                 <!-- <span>:</span>
                 <span id="postMilisec">00</span>--> <!--밀리초 -->
                 </div>
@@ -30,7 +30,7 @@
                 <div>
                     <button type="button" id="StartBtn">START</button><!--시작/재시작/기록 버튼-->
                     <button type="button" id="StopBtn">STOP</button><!--스톱 버튼-->
-                    <button type="submit" id="SaveBtn" name="SaveBtn">SAVE</button>
+                    <button type="submit" id="SaveBtn" >SAVE</button>
                 </div>
             </form>
     </div>
@@ -50,6 +50,7 @@
         var startBtn = document.getElementById('StartBtn')
         var stopBtn = document.getElementById('StopBtn')
         var recordList = document.getElementById('RecordList')
+        var saveBtn = document.getElementById('SaveBtn')
         //document.getElementById(): html에서 해당 아이디를 가진 태그를 선택합니다.
     
         startBtn.addEventListener('click',function(){
@@ -128,7 +129,24 @@
                 }
             }
         })
-    
+        //save 버튼 부분
+        saveBtn.addEventListener('click', function(){
+            // $('#study_hour').val();
+            // $('#study_sec').val();
+            $.ajax({
+                type: "POST",
+                url: '/timer',
+                data:{
+                    study_hour : hour.Text(),
+                    study_min : min,
+                    study_sec : sec
+                },
+                success: function(response){
+                    console.log(study_hour)
+                }
+            })
+        })
+
         function addZero(num){
             // 10보다 작으면 앞에 0을 붙임
             return (num < 10 ? "0"+num: ""+num)
