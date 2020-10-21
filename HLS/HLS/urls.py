@@ -24,6 +24,6 @@ urlpatterns = [
     path('register/', RegisterView.as_view()),
     path('login/', LoginView.as_view()),
     path('logout/', logout),
-    path('timer/', SaveTime.as_view()),
+    path('timer/', SaveTime),
     # path('timer_rank/',timer_rank)
 ]

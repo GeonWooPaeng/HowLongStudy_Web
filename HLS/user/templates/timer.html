@@ -53,6 +53,7 @@
         var saveBtn = document.getElementById('SaveBtn')
         //document.getElementById(): html에서 해당 아이디를 가진 태그를 선택합니다.
     
+        
         startBtn.addEventListener('click',function(){
             //addEventListener('click'): 위의 것이 click이 되면서 function()과 그 안의 것을 수행한다.
             
@@ -130,20 +131,19 @@
             }
         })
         //save 버튼 부분
+        
         saveBtn.addEventListener('click', function(){
-            // $('#study_hour').val();
-            // $('#study_sec').val();
-            $.ajax({
-                type: "POST",
+            var time_data = [{"study_hour": hour, "study_min": min, "study_sec": sec}]; // json data
+
+            jQuery.ajax({
                 url: '/timer',
-                data:{
-                    study_hour : hour.Text(),
-                    study_min : min,
-                    study_sec : sec
-                },
-                success: function(response){
-                    console.log(study_hour)
-                }
+                type: "POST",
+                dataType:"json",
+                data: JSON.stringify(time_data)
+            }).done(function(data){
+                alert("전송됬습니다.");
+            }).fail(function(data){
+                alert("문제입니다." );
             })
         })
 
