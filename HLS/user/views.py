@@ -78,8 +78,11 @@ def SaveTime(request):
         return redirect('/login')
 
     if request.method == 'POST':
-        time_data = json.loads(request.body)
+        time_data = request.body
+        
+        # post = Post.objects.create(
 
+        # )
         print(time_data)
         # user = User(
         #     user=User.objects.get(email=request.session.get('user'))
@@ -88,6 +91,5 @@ def SaveTime(request):
         #     study_sec=int(time_data.get('study_sec',None))
         #     )
         # user.save()
-
     
     return render(request, 'timer.html')

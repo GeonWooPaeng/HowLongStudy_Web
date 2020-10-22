@@ -130,22 +130,19 @@
                 }
             }
         })
+
         //save 버튼 부분
         
         saveBtn.addEventListener('click', function(){
-            var time_data = [{"study_hour": hour, "study_min": min, "study_sec": sec}]; // json data
-
+            var time_data = {"study_hour": hour, "study_min": min, "study_sec": sec}
             jQuery.ajax({
                 url: '/timer',
                 type: "POST",
                 dataType:"json",
-                data: JSON.stringify(time_data)
-            }).done(function(data){
-                alert("전송됬습니다.");
-            }).fail(function(data){
-                alert("문제입니다." );
+                data: JSON.stringify(time_data),
             })
         })
+        
 
         function addZero(num){
             // 10보다 작으면 앞에 0을 붙임
