@@ -60,7 +60,7 @@ def logout(request):
 #                 user=User.objects.get(email=self.request.session.get('email')),
 #                 # study_hour=form.data.get('study_hour'),
 #                 # study_min=form.data.get('study_min'),
-#                 study_sec=json.loads(request.body)
+#                 # study_sec=json.loads(request.body)
 #             )
 #             user.save() 
 #         return super().form_valid(form)
@@ -77,19 +77,13 @@ def SaveTime(request):
     if not request.session.get('user'):
         return redirect('/login')
 
-    if request.method == 'POST':
-        time_data = request.body
-        
-        # post = Post.objects.create(
-
-        # )
-        print(time_data)
-        # user = User(
-        #     user=User.objects.get(email=request.session.get('user'))
-        #     study_hour=form.data.get('study_hour'),
-        #     study_min=form.data.get('study_min'),
-        #     study_sec=int(time_data.get('study_sec',None))
-        #     )
-        # user.save()
+    # if request.method == 'POST':
+    #     user = User(
+    #         user=User.objects.get(email=request.session.get('user')),
+    #         study_hour=form.data.get('study_hour'),
+    #         study_min=form.data.get('study_min'),
+    #         study_sec=int(time_data.get('study_sec',None))
+    #         )
+    #     user.save()
     
     return render(request, 'timer.html')

@@ -27,6 +27,9 @@
                 <div>
                     <ul id="RecordList"></ul><!--중간 기록할 리스트-->
                 </div>
+                <input type="hidden" name = "study_hour" value="">
+                <input type="hidden" name = "study_min" value="">
+                <input type="hidden" name = "study_sec" value="">
                 <div>
                     <button type="button" id="StartBtn">START</button><!--시작/재시작/기록 버튼-->
                     <button type="button" id="StopBtn">STOP</button><!--스톱 버튼-->
@@ -34,6 +37,7 @@
                 </div>
             </form>
     </div>
+    <div id="time_data"></div>
 
     <!-- vanilla js 부분(timer) -->
     <script type="text/javascript">
@@ -134,13 +138,14 @@
         //save 버튼 부분
         
         saveBtn.addEventListener('click', function(){
-            var time_data = {"study_hour": hour, "study_min": min, "study_sec": sec}
-            jQuery.ajax({
-                url: '/timer',
+            var time_data = [{"study_hour": hour, "study_min": min, "study_sec": sec}]
+            $.ajax({
+                url: 'timer.html',
                 type: "POST",
-                dataType:"json",
-                data: JSON.stringify(time_data),
-            })
+                dataType:"text",
+                data: time_data,
+            });
+            $('#time_data').html(html)
         })
         
 
