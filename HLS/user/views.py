@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
 from django.utils.decorators import method_decorator 
-from .forms import RegisterForm, LoginForm, SaveForm
+from .forms import RegisterForm, LoginForm #SaveForm
 from django.contrib.auth.hashers import make_password
 from django.db import transaction 
 from user.decorators import login_required
@@ -73,17 +73,19 @@ def logout(request):
 #         })
 #         return kw 
 
-def SaveTime(request):
-    if not request.session.get('user'):
-        return redirect('/login')
+# def SaveTime(request):
+#     if not request.session.get('user'):
+#         return redirect('/login')
 
-    # if request.method == 'POST':
-    #     user = User(
-    #         user=User.objects.get(email=request.session.get('user')),
-    #         study_hour=form.data.get('study_hour'),
-    #         study_min=form.data.get('study_min'),
-    #         study_sec=int(time_data.get('study_sec',None))
-    #         )
-    #     user.save()
+#     if request.method == 'POST':
+#         user = User(
+#             email=User.objects.get(email=request.session.get('user')),
+#             study_day = request.POST.get('study_day',0),
+#             study_hour= request.POST.get('study_hour',0),
+#             study_min= request.POST.get('study_min', 0),
+#             study_sec = request.POST.get('study_sec',0)
+#             )
+#         user.save()
     
-    return render(request, 'timer.html')
+#     return render(request, 'timer.html')
+

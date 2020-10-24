@@ -20,16 +20,16 @@
                 <span>:</span>
                 <span id="study_min">00</span> <!--분-->
                 <span>:</span>
-                <span id="study_sec" name="study_sec">00</span> <!--초-->
+                <span id="study_sec" >00</span> <!--초-->
                 <!-- <span>:</span>
                 <span id="postMilisec">00</span>--> <!--밀리초 -->
                 </div>
                 <div>
                     <ul id="RecordList"></ul><!--중간 기록할 리스트-->
                 </div>
-                <input type="hidden" name = "study_hour" value="">
-                <input type="hidden" name = "study_min" value="">
-                <input type="hidden" name = "study_sec" value="">
+                <!-- <input type="hidden" name = "study_hour" value="$('#study_hour').text()">
+                <input type="hidden" name = "study_min" value="$('#study_min').text()"> -->
+                <input type="hidden" name = "study_sec" value="2">
                 <div>
                     <button type="button" id="StartBtn">START</button><!--시작/재시작/기록 버튼-->
                     <button type="button" id="StopBtn">STOP</button><!--스톱 버튼-->
@@ -37,7 +37,6 @@
                 </div>
             </form>
     </div>
-    <div id="time_data"></div>
 
     <!-- vanilla js 부분(timer) -->
     <script type="text/javascript">
@@ -137,16 +136,16 @@
 
         //save 버튼 부분
         
-        saveBtn.addEventListener('click', function(){
-            var time_data = [{"study_hour": hour, "study_min": min, "study_sec": sec}]
-            $.ajax({
-                url: 'timer.html',
-                type: "POST",
-                dataType:"text",
-                data: time_data,
-            });
-            $('#time_data').html(html)
-        })
+        // saveBtn.addEventListener('click', function(){
+        //     var time_data = [{"study_hour": hour, "study_min": min, "study_sec": sec}]
+        //     $.ajax({
+        //         url: 'timer.html',
+        //         type: "POST",
+        //         dataType:"text",
+        //         data: time_data,
+        //     });
+        //     $('#time_data').html(html)
+        // })
         
 
         function addZero(num){

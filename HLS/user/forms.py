@@ -66,19 +66,20 @@ class LoginForm(forms.Form):
 
 
 
-class SaveForm(forms.Form):
+# class SaveForm(forms.Form):
 
-    def __init__(self, request, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.request = request 
+#     def __init__(self, request, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.request = request 
 
-    study_hour = forms.IntegerField()
-    study_min = forms.IntegerField() 
-    study_sec = forms.IntegerField() 
+#     study_day = forms.IntegerField()
+#     study_hour = forms.IntegerField()
+#     study_min = forms.IntegerField() 
+#     study_sec = forms.IntegerField() 
 
-    def clean(self):
-        cleaned_data = super().clean() 
-        user = self.request.session.get('user')
-        study_hour = cleaned_data.get('study_hour')
-        study_min = cleaned_data.get('study_min')
-        study_sec = cleaned_data.get('study_sec')
+#     def clean(self):
+#         cleaned_data = super().clean() 
+#         user = self.request.session.get('user')
+#         study_hour = cleaned_data.get('study_hour')
+#         study_min = cleaned_data.get('study_min')
+#         study_sec = cleaned_data.get('study_sec')
