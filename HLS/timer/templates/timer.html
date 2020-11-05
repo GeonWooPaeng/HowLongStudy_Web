@@ -29,7 +29,7 @@
                 </div>
                 <!-- <input type="hidden" name = "study_hour" value="$('#study_hour').text()">
                 <input type="hidden" name = "study_min" value="$('#study_min').text()"> -->
-                <input type="hidden" name = "study_sec" value="2">
+                <input type="hidden" id = "study_sec"/>
                 <div>
                     <button type="button" id="StartBtn">START</button><!--시작/재시작/기록 버튼-->
                     <button type="button" id="StopBtn">STOP</button><!--스톱 버튼-->
@@ -101,7 +101,7 @@
     
                 document.getElementById('study_hour').innerText = hour
                 document.getElementById('study_min').innerText = min
-                document.getElementById('study_sec').innerText = sec
+                document.getElementById('study_sec').innerText = int(sec)
                 // document.getElementById('postMilisec').innerText = milisec
                 // innerText: 문자열 
             }, 1)
@@ -136,17 +136,12 @@
 
         //save 버튼 부분
         
-        // saveBtn.addEventListener('click', function(){
-        //     var time_data = [{"study_hour": hour, "study_min": min, "study_sec": sec}]
-        //     $.ajax({
-        //         url: 'timer.html',
-        //         type: "POST",
-        //         dataType:"text",
-        //         data: time_data,
-        //     });
-        //     $('#time_data').html(html)
-        // })
-        
+        saveBtn.addEventListener('click', function(){
+            document.getElementById("study_hour").value = hour;
+            document.getElementById("study_min").value = min; 
+            document.getElementById("study_sec").value = parseInt(document.getElementById('study_sec').innerText);
+        })
+
 
         function addZero(num){
             // 10보다 작으면 앞에 0을 붙임
