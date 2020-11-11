@@ -1,4 +1,4 @@
-<!-- {% extends "base.html" %}
+{% extends "base.html" %}
 {% load humanize %}
 {% block contents %}
 <div class="row mt-5">
@@ -8,21 +8,17 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">사용자</th>
-                    <th scope="col">총 공부시간</th>
-                    <th scope="col">평균 공부시간</th>
-                    <th scope="col">등록날짜</th>
+                    <th scope="col">공부 시간</th>
                 </tr>
             </thead>
             <tbody class="text-dark">
                 {% for timer in timer_list %}
                 <tr>
-                    <th scopr="row">{{ timer.id }}</th>
-                    <th>{{ timer.name }}</a> </th>
-                    <th>{{ timer.total }}</th>
-                    <th>{{ timer.avg }}</th>
+                    <th scope="row">{{ timer.user }}</th>
+                    <th scope="row">{{time.study_day}}일 + {{time.study_hour}}시 + {{time.study_min}}분 + {{time.study_sec}}초</th>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-</div> -->
+</div>

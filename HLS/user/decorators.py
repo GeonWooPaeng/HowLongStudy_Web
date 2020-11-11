@@ -7,7 +7,7 @@ def login_required(function):
         user = request.session.get('user')
         if user is None or not user:
             return redirect('/login')
-        return function(request, *args, **kwargs) 
+        return function(request, **kwargs) 
         
     return wrap 
 
