@@ -1,24 +1,42 @@
 {% extends "base.html" %}
-{% load humanize %}
 {% block contents %}
+<div class="row mt-5">
+    <div class="col-12 text-center">
+        <h1>Study Time</h1>
+    </div>
+</div>
+<hr/>
+    <div >
+        <button class="btn btn-primary btn-block" onclick="location.href='/'">Home</button>
+        <button class="btn btn-primary btn-block" onclick="location.href='/timer/'">Study More</button>
+    </div>
+<hr/>
 <div class="row mt-5">
     <div class="col-12">
         <table class="table table-light">
             <thead class="thead-ligth">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">사용자</th>
-                    <th scope="col">공부 시간</th>
+                    <th scope="col">Study Day</th>
+                    <th scope="col">Study Hour</th>
+                    <th scope="col">Study Min</th>
+                    <th scope="col">Study Sec</th>
+                    <th scope="col">공부한 날짜</th>
                 </tr>
             </thead>
             <tbody class="text-dark">
                 {% for timer in timer_list %}
                 <tr>
                     <th scope="row">{{ timer.user }}</th>
-                    <th scope="row">{{time.study_day}}일 + {{time.study_hour}}시 + {{time.study_min}}분 + {{time.study_sec}}초</th>
+                    <th scope="row">{{timer.study_day}}일</th>
+                    <th scope="row">{{timer.study_hour}}시</th>
+                    <th scope="row">{{timer.study_min}}분</th>
+                    <th scope="row">{{timer.study_sec}}초</th>
+                    <th scope="row">{{timer.register_date}}</th>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+{% endblock %}

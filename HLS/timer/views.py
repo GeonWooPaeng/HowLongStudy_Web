@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
 from django.utils.decorators import method_decorator
 from user.decorators import login_required
-from django.views.generic import ListView 
+from django.views.generic import ListView,FormView 
 from user.models import User
 from .models import Timer
+
 
 
 
@@ -24,15 +25,8 @@ def SaveTime(request):
             study_min= smin,
             study_sec = ssec
             )
-        if ssec > 60:
-            prod.study_min += 1
-            smin = 0 
-        
-        elif smin > 60:
-            prod.study_hour += 1 
-            smin = 0
 
-        elif shour > 24:
+        if shour > 24:
             prod.study_day += 1 
             shour = 0
 
@@ -41,11 +35,7 @@ def SaveTime(request):
     return render(request, 'timer.html')
 
 
-# @method_decorator(login_required, name='dispatch')
 class TimerList(ListView):
+    model = Timer
     template_name = 'timer_rank.html'
     context_object_name= 'timer_list'
-
-    # def get_queryset(self, **kwargs):
-    #     queryset = Timer.objects.filter(user_email=self.request.session.get('user'))
-    #     return queryset 
