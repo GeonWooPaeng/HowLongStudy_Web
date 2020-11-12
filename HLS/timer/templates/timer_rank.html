@@ -25,7 +25,7 @@
                 </tr>
             </thead>
             <tbody class="text-dark">
-                {% for timer in timer_list %}
+                {% for timer in timers %}
                 <tr>
                     <th scope="row">{{ timer.user }}</th>
                     <th scope="row">{{timer.study_day}}일</th>
@@ -37,6 +37,35 @@
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-12">
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if timers.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?p={{timers.previous_page_number }}">이전으로</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">이전으로</a>
+                </li>
+                {% endif %}
+                <li class="page-item">
+                    <a class="page-link" href="#">{{timers.number}}/{{timers.paginator.num_pages}}</a>
+                </li>
+                {% if timers.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?p={{ timers.next_page_number }}">다음으로</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">다음으로</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
     </div>
 </div>
 {% endblock %}
