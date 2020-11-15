@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,9 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '24rl!^b$&vq-&%^+b@6^hb1mihn=+doe*ny7rrq6%4z0)nxh8@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# pythonanyware로 배포하면 pythonanyware을 가입한 아이디 작성
+# 배포 후 해당 주소로만 들어오게 한다. '*' -> 모든 주소
+# 'gwpaeng.pythonanywhere.com'
+ALLOWED_HOSTS = ['gwpaeng.pythonanywhere.com']
 
 
 # Application definition
@@ -121,3 +125,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
